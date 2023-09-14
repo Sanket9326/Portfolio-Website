@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+.language {
+      font-size: 6rem; /* Increase icon size */
+      margin: 20px;
+      color: #3498db;
+      opacity: 0.5;
+      transition: opacity 0.5s;
+    }
+    
+    .language:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    
+    .languages-container {
+      display: flex;
+      align-items: flex-start;
+      overflow: hidden; /* Hide overflow to enable carousel effect */
+      white-space: nowrap; /* Prevent line break */
+    }
+    
+    .language-wrapper {
+      text-align: center;
+      margin-right: 30px;
+      transition: transform 0.5s; /* Add transition effect */
+    }
+    
+    .language-wrapper h5 {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+
+    .active {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+
+.animated-block {
+      width: 300px;
+      height: 200px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .animated-block .photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s;
+    }
+    
+    .animated-block .content {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      transition: left 0.5s;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      opacity: 0;
+    }
+    
+    .animated-block:hover .photo {
+      opacity: 0;
+    }
+    
+    .animated-block:hover .content {
+      left: 0;
+      opacity: 1;
+    }
+    
+
+    #clouds{
+	padding: 100px 0;
+	background: #c9dbe9;
+	background: -webkit-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+	background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);
+	background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
+}
+
+/*Time to finalise the cloud shape*/
+.cloud {
+	width: 200px; height: 60px;
+	background: #fff;
+	
+	border-radius: 200px;
+	-moz-border-radius: 200px;
+	-webkit-border-radius: 200px;
+	
+	position: relative; 
+}
+
+.cloud:before, .cloud:after {
+	content: '';
+	position: absolute; 
+	background: #fff;
+	width: 100px; height: 80px;
+	position: absolute; top: -15px; left: 10px;
+	
+	border-radius: 100px;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	
+	-webkit-transform: rotate(30deg);
+	transform: rotate(30deg);
+	-moz-transform: rotate(30deg);
+}
+
+.cloud:after {
+	width: 120px; height: 120px;
+	top: -55px; left: auto; right: 15px;
+}
+
+/*Time to animate*/
+.x1 {
+	-webkit-animation: moveclouds 15s linear infinite;
+	-moz-animation: moveclouds 15s linear infinite;
+	-o-animation: moveclouds 15s linear infinite;
+}
+
+/*variable speed, opacity, and position of clouds for realistic effect*/
+.x2 {
+	left: 200px;
+	
+	-webkit-transform: scale(0.6);
+	-moz-transform: scale(0.6);
+	transform: scale(0.6);
+	opacity: 0.6; /*opacity proportional to the size*/
+	
+	/*Speed will also be proportional to the size and opacity*/
+	/*More the speed. Less the time in 's' = seconds*/
+	-webkit-animation: moveclouds 25s linear infinite;
+	-moz-animation: moveclouds 25s linear infinite;
+	-o-animation: moveclouds 25s linear infinite;
+}
+
+.x3 {
+	left: -250px; top: -200px;
+	
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	transform: scale(0.8);
+	opacity: 0.8; /*opacity proportional to the size*/
+	
+	-webkit-animation: moveclouds 20s linear infinite;
+	-moz-animation: moveclouds 20s linear infinite;
+	-o-animation: moveclouds 20s linear infinite;
+}
+
+.x4 {
+	left: 470px; top: -250px;
+	
+	-webkit-transform: scale(0.75);
+	-moz-transform: scale(0.75);
+	transform: scale(0.75);
+	opacity: 0.75; /*opacity proportional to the size*/
+	
+	-webkit-animation: moveclouds 18s linear infinite;
+	-moz-animation: moveclouds 18s linear infinite;
+	-o-animation: moveclouds 18s linear infinite;
+}
+
+.x5 {
+	left: -150px; top: -150px;
+	
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	transform: scale(0.8);
+	opacity: 0.8; /*opacity proportional to the size*/
+	
+	-webkit-animation: moveclouds 20s linear infinite;
+	-moz-animation: moveclouds 20s linear infinite;
+	-o-animation: moveclouds 20s linear infinite;
+}
+
+@-webkit-keyframes moveclouds {
+	0% {margin-left: 1000px;}
+	100% {margin-left: -1000px;}
+}
+@-moz-keyframes moveclouds {
+	0% {margin-left: 1000px;}
+	100% {margin-left: -1000px;}
+}
+@-o-keyframes moveclouds {
+	0% {margin-left: 1000px;}
+	100% {margin-left: -1000px;}
+}
+
+
+@keyframes avatarAnimation {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    .profile-avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #ccc;
+      animation: avatarAnimation 2s ease-in-out infinite;
+    }
+
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Meyawo landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Portfolio Sanket</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <!-- Bootstrap + Meyawo main styles -->
+    <link rel="stylesheet" href="assets/css/meyawo.css">
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+<script src="https://https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script src="./mail.js"></script>
+    <!-- Page Navbar -->
+    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            
+            <ul class="nav">
+                <li class="item">
+                    <a class="link" href="#home">Home</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#about">About</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#portfolio">Portfolio</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#Inter">Intrenships</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#Lang">Languages</a>
+                </li>
+                
+                <li class="item">
+                    <a class="link" href="#testmonial">Testmonial</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#blog">Blog</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#contact">Contact</a>
+                </li>
+                
+            </ul>
+            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+                <div class="hamburger-box">
+                    <div class="hamburger-inner"></div>
+                </div>
+            </a>
+        </div>
+    </nav><!-- End of Page Navbar -->
+
+   
+
+
+    <!-- page header -->
+    <header id="home" class="header">
+       
+      
+       
+
+        <div class="overlay"></div>
+        <div class="header-content container" >
+           
+            
+            <h1 class="header-title">
+
+               <div>
+                <div >
+                    <div class="cloud x1"></div>
+                    <div class="cloud x2"></div>
+                    <div class="cloud x3"></div>
+                    <div class="cloud x4"></div>
+                    <div class="cloud x5"></div>
+                    <!-- Time for multiple clouds to dance around -->
+                   
+                </div>
+               </div>
+              <span class="up">HI!</span>
+
+                <span class="down">I am Sanket Sawant</span>
+               
+            </h1>
+            <p class="header-subtitle">FRONTEND WEB DESIGNER</p>
+            <p class="header-subtitle">ANDRIOD DEVLOPER</p>
+
+            <button class="btn btn-primary">Visit My Works</button>
+        </div>
+  
+
+    </header><!-- end of page header -->
+
+    <!-- about section -->
+    <section class="section pt-0" id="about">
+        <!-- container -->
+        <div class="container text-center">
+            <!-- about wrapper -->
+            <div class="about">
+                <div class="about-img-holder">
+                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/ljvjsnvh.json"
+    trigger="hover"
+    colors="primary:#4be1ec,secondary:#cb5eee"
+    state="hover-1"
+    style="width:200px;height:200px">
+</lord-icon>
+                       
+                </div>
+     
+   
+                <div class="about-caption">
+                </br>
+                </br>
+                </br>
+                    <p class="section-subtitle"> </br>Who Am I ?</p>
+                    <h2 class="section-title mb-3">About Me</h2>
+                    <p>
+                        Welcome to my portfolio website! I'm Sanket Sambhaji Sawant, a Computer Science and Engineering student at SITCOE College. My expertise lies in frontend web designing and Java programming. With a strong command of HTML, CSS, and JavaScript, I create captivating and user-friendly websites. Additionally, I have a solid foundation in Java, covering areas such as object-oriented programming, data structures, algorithms, and application development.
+                        <br> I am continuously striving to expand my knowledge, I stay up-to-date with the latest trends in the industry. Collaboration is one of my strengths, as I thrive in team environments and believe in effective communication and adaptability. Feel free to explore my portfolio to see my work. Let's connect and explore exciting opportunities in frontend web designing and Java programming together.
+                    </p>
+                    <button id=downloadButton class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+                </div>
+            </div><!-- end of about wrapper -->
+        </div><!-- end of container -->
+    </section> <!-- end of about section -->
+    <script>document.getElementById("downloadButton").addEventListener("click", function() {
+        var filename = "Sanket Resume.pdf";  // Replace with the actual filename and extension of your resume
+        var link = document.createElement('a');
+        link.href = 'assets/imgs/Sanket Resume.pdf';  // Replace with the actual path to your resume file
+        link.download = filename;
+        link.click();
+    });</script>
+    
+    
+    <!-- service section -->
+    <section class="section" id="service">
+        <div class="container text-center">
+            <p class="section-subtitle">What I Do ?</p>
+            <h6 class="section-title mb-6">Service</h6>
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/pencil-case.svg"
+                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
+                                class="icon">
+                            <h6 class="title">Frontend Web Designing</h6>
+                            <p class="subtitle">Visually appealing and user-friendly website design</br>
+                                Expertise in HTML, CSS.
+                                </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/responsive.svg"
+                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
+                                class="icon">
+                            <h6 class="title">Java Application Development</h6>
+                            <p class="subtitle">Robust and efficient software solutions</br>
+                                Proficient in Java programming</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/toolbox.svg"
+                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
+                                class="icon">
+                            <h6 class="title">Code Review and Refactoring</h6>
+                            <p class="subtitle">Comprehensive code review and optimization.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/analytics.svg"
+                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
+                                class="icon">
+                                <h6 class="title">Responsive Web Design</h6>
+                                <p class="subtitle">Websites optimized for various devices and screen sizes</br>
+                                    Seamless browsing experience on desktop, tablets, and mobile.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of row -->
+        </div>
+    </section><!-- end of service section -->
+
+    <!-- portfolio section -->
+    <section class="section" id="portfolio">
+        <div class="container text-center">
+            <p class="section-subtitle">What I Did ?</p>
+            <h6 class="section-title mb-6">Portfolio</h6>
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img src="assets/imgs/folio-1.jpg" class="portfolio-card-img"
+                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>Frontend Web Designing</h5>
+                                    <p class="font-weight-normal">Developed visually appealing and user-friendly websites using HTML, CSS, and JavaScript.
+                                    </br> Implemented responsive designs and optimized performance for seamless user experiences.</p>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img class="portfolio-card-img" src="assets/imgs/folio-2.jpg" class="img-responsive rounded"
+                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>Andriod Devloper</h5>
+                                    <p class="font-weight-normal">Creating innovative and user-friendly Android applications that seamlessly blend cutting-edge technology with exceptional user experiences.</p>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img class="portfolio-card-img" src="assets/imgs/folio-3.jpg" class="img-responsive rounded"
+                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>Backend Web Designing</h5>
+                                    <p class="font-weight-normal">Transforming complex ideas into elegant and robust backend systems, delivering seamless functionality and exceptional performance.</p>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+    </section> <!-- end of portfolio section -->
+
+    <!-- pricing section -->
+    
+
+
+    <div id="Inter" class="container text-center">
+        
+        <h1 class="section-title mb-6">Intrenships</h1>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="animated-block">
+              <img class="photo" src="assets/imgs/mind.jpeg" alt="Photo 1">
+              <div class="content">
+                <h4>Mind-IT services</h4>
+                <p style="color:#f0f0f0">I successfully completed an internship at Mind IT Services, where I focused on developing my skills in SQL and database administration.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="animated-block">
+              <img class="photo" src="assets/imgs/sangli.jpeg" alt="Photo 2">
+              <div class="content">
+                <h4>Sangli software</h4>
+                <p style="color:#f0f0f0">I completed an internship at Sangli Software, where I specialized in working with HTML, CSS, and Bootstrap, refining my expertise in building responsive and visually appealing websites.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="animated-block">
+              <img class="photo" src="assets/imgs/onestar.jpg " alt="Photo 3">
+              <div class="content">
+                <h4>onestar Solutions</h4>
+                <p>I've wrapped up my Machine Learning internship at OneStar Solution, Sangli, successfully. It's been an incredible journey, diving into practical projects and learning alongside a talented team.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+    <!-- section -->
+    </br>
+    </br>
+    </br>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <div class="container text-center">
+        
+    <h1 class="section-title mb-6">Knowlege Of Languages </h1>
+    <div id="Lang" class="row">
+        <div class="col-md-12">
+          <div class="languages-container">
+            <div class="language-wrapper">
+              <i class="fab fa-java language"></i>
+              <h5>Java</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fab fa-html5 language"></i>
+              <h5>HTML</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fab fa-css3-alt language"></i>
+              <h5>CSS</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fab fa-bootstrap language"></i>
+              <h5>Bootstrap</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fas fa-database language"></i>
+              <h5>SQL</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fab fa-cuttlefish language"></i>
+              <h5>C</h5>
+            </div>
+            <div class="language-wrapper">
+              <i class="fab fa-cuttlefish language"></i>
+              <h5>C++</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+        // Automatically move the icons like a carousel
+        setInterval(function() {
+          const container = document.querySelector('.languages-container');
+          const firstItem = container.firstElementChild;
+          container.appendChild(firstItem);
+          
+          // Reset hover effect on all icons
+          const icons = document.querySelectorAll('.language');
+          icons.forEach(icon => {
+            icon.classList.remove('active');
+          });
+          
+          // Apply hover effect to the middle icon
+          const middleIcon = container.children[3].querySelector('.language');
+          middleIcon.classList.add('active');
+        }, 2000); // Adjust the interval (in milliseconds) for the desired speed
+      </script>
+
+</br>
+</br>
+</br>
+
+    <section class="section-sm bg-primary">
+        <!-- container -->
+        <div class="container text-center text-sm-left" >
+            <!-- row -->
+            <div class="row align-items-center">
+                <div class="col-sm offset-md-1 mb-4 mb-md-0">
+                    <h6 class="title text-light">Want to work with me?</h6>
+                    <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
+                </div>
+                <div class="col-sm offset-sm-2 offset-md-3">
+                    <button class="btn btn-lg my-font btn-light rounded">Hire Me</button>
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </section> <!-- end of section -->
+
+    <!-- testimonial section -->
+    <section class="section" id="testmonial">
+        <div class="container text-center">
+            <p class="section-subtitle">What Think Client About Me ?</p>
+            <h6 class="section-title mb-6">Testmonial</h6>
+
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-img-holder ">
+                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/dqxvvqzi.json"
+    trigger="hover"
+    colors="outline:#121331,primary:#ffc738,secondary:#4bb3fd"
+    state="hover-looking-around"
+    style="width:100px;height:100px">
+</lord-icon>
+                               
+                        </div>
+                        <div class="testimonial-card-body">
+                            <p class="testimonial-card-subtitle">Working with Sanket as our web developer has been an absolute pleasure. Sanket demonstrated exceptional skill and creativity in bringing our website to life, surpassing our expectations at every step.</p>
+                            <h6 class="testimonial-card-title">Vikrant</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-img-holder">
+                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<lord-icon
+    src="https://cdn.lordicon.com/dqxvvqzi.json"
+    trigger="hover"
+    colors="outline:#121331,primary:#ffc738,secondary:#4bb3fd"
+    state="hover-looking-around"
+    style="width:100px;height:100px">
+</lord-icon>
+                        </div>
+                        <div class="testimonial-card-body">
+                            <p class="testimonial-card-subtitle">It has been an incredible experience collaborating with Sanket on our web development project. Sanket's technical prowess and ability to understand our unique requirements resulted in a website that perfectly aligns with our brand.</p>
+                            <h6 class="testimonial-card-title">Sujay</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end of container -->
+    </section> <!-- end of testimonial section -->
+
+    <!-- blog section -->
+    <section class="section" id="blog">
+        <!-- container -->
+        <div class="container text-center">
+            <p class="section-subtitle">Recent Posts?</p>
+            <h6 class="section-title mb-6">Blog</h6>
+            <!-- blog-wrapper -->
+            <div class="blog-card">
+                <div class="blog-card-header">
+                    <img src="assets/imgs/img-1.jpg" class="blog-card-img"
+                        alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                </div>
+                <div class="blog-card-body">
+                    <h5 class="blog-card-title">Unlocking Success: The Key Elements of an Effective Website Design</h6>
+
+                        <p class="blog-card-caption">
+                            <a href="#">By: Admin</a>
+                            <a href="#"><i class="ti-heart text-danger"></i> 234</a>
+                            <a href="#"><i class="ti-comment"></i> 123</a>
+                        </p>
+                        <p>In today's digital landscape, a well-crafted website is the key to unlocking success for businesses and individuals alike. An effective website design is not just about aesthetics; it's a strategic combination of various elements that work harmoniously to create an engaging user experience and drive desired outcomes.
+
+First and foremost, a clear and intuitive navigation structure is vital. Visitors should be able to easily explore different sections of your website, find the information they need, and take desired actions. By organizing your content logically and implementing user-friendly menus and navigation bars, you ensure that visitors can navigate effortlessly and stay engaged.</p>
+
+                        
+
+                        <a href="#" class="blog-card-link">Read more <i class="ti-angle-double-right"></i></a>
+                </div>
+            </div><!-- end of blog wrapper -->
+
+            <!-- blog-wrapper -->
+            <div class="blog-card">
+                <div class="blog-card-header">
+                    <img src="assets/imgs/img-2.jpg" class="blog-card-img">
+                       
+                </div>
+                <div class="blog-card-body">
+                    <h5 class="blog-card-title">Building a Strong Online Presence: The Power of a Well-Designed Website</h6>
+
+                        <p class="blog-card-caption">
+                            <a href="#">By: Admin</a>
+                            <a href="#"><i class="ti-heart text-danger"></i> 456</a>
+                            <a href="#"><i class="ti-comment"></i> 264</a>
+                        </p>
+
+                        <p>A well-designed website goes beyond aesthetics; it incorporates intuitive navigation, user-friendly interfaces, and compelling visuals that capture attention and leave a lasting impression. It is the perfect platform to showcase your products, services, or ideas, conveying your unique value proposition to your target audience.Moreover, a well-optimized website plays a pivotal role in search engine rankings, ensuring that your brand or content appears prominently in search results. By implementing effective SEO strategies, such as using relevant keywords, creating valuable content, and optimizing page load speed, your website becomes more discoverable, driving organic traffic and increasing your online visibility.</p>
+
+                        <a href="#" class="blog-card-link">Read more <i class="ti-angle-double-right"></i></a>
+                </div>
+            </div><!-- end of blog wrapper -->
+
+        </div><!-- end of container -->
+    </section><!-- end of blog section -->
+
+    <!-- contact section -->
+    <section class="section" id="contact">
+        <div class="container text-center">
+            <p class="section-subtitle">How can you communicate?</p>
+            <h6 class="section-title mb-5">Contact Me</h6>
+            <!-- contact form -->
+            <form action="" class="contact-form col-md-10 col-lg-8 m-auto" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <input type="text" size="50" class="form-control" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email" required>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <textarea name="comment" id="comment" rows="6" class="form-control" placeholder="Write Something"></textarea>
+                    </div>
+                    <div class="form-group col-sm-12 mt-3">
+                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
+                    </div>
+                </div>
+            </form><!-- end of contact form -->
+        </div><!-- end of container -->
+    </section><!-- end of contact section -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUlXtkGSD8GvQRmGxrZO9c1ww4D1xIZSU",
+    authDomain: "sanket-958cc.firebaseapp.com",
+    projectId: "sanket-958cc",
+    storageBucket: "sanket-958cc.appspot.com",
+    messagingSenderId: "342181997074",
+    appId: "1:342181997074:web:c0d0d3c1101db8427bc6cb",
+    measurementId: "G-TDH5515BY7"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase();
+      
+        // Get the form element
+        const contactForm = document.getElementById('contactForm');
+      
+        // Handle form submission
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+      
+          // Get the form input values
+          const nameInput = document.getElementById('name');
+          const emailInput = document.getElementById('email');
+          const commentInput = document.getElementById('comment');
+      
+          const name = nameInput.value;
+          const email = emailInput.value;
+          const comment = commentInput.value;
+      
+          // Push the form data to Firebase Realtime Database
+          const contactRef = push(ref(database, 'contacts'));
+          contactRef.set({
+            name: name,
+            email: email,
+            comment: comment
+          })
+          .then(() => {
+            // Clear the form inputs after successful submission
+            nameInput.value = '';
+            emailInput.value = '';
+            commentInput.value = '';
+            console.log('Form data stored successfully!');
+          })
+          .catch((error) => {
+            console.error('Error storing form data:', error);
+          });
+        });
+      </script>
+
+    <!-- footer -->
+    <div class="container">
+        <footer class="footer">
+            <p class="mb-0">Copyright
+                <script>document.write(new Date().getFullYear())</script> &copy; <a
+                    href="#">Sanket Sawant</a>  
+            </p>
+            <div class="social-links text-right m-auto ml-sm-auto">
+                
+                <a href="https://twitter.com/Sanket_9326" class="link"><i class="ti-twitter-alt"></i></a>
+                <a href="https://mail.google.com/mail/u/0/?ogbl#inbox" class="link"><i class="ti-google"></i></a>
+                
+                <a href="https://instagram.com/sanket_9326?igshid=MzNlNGNkZWQ4Mg==" class="link"><i class="ti-instagram"></i></a>
+                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
+               
+            </div>
+        </footer>
+    </div> <!-- end of page footer -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    
+    <!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap 3 affix -->
+    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- Meyawo js -->
+    <script src="assets/js/meyawo.js"></script>
+    
+</body>
+
+</html>
